@@ -1,0 +1,15 @@
+:root {
+  --color-primary: #0b5fff;
+  --color-muted: #6b7280;
+  --radius: 8px;
+}
+
+html { box-sizing: border-box }
+*,*::before,*::after { box-sizing: inherit }
+
+body { margin:0; font-family: var(--font-geist-sans, system-ui, -apple-system, 'Segoe UI', Roboto); }
+
+button { font-family: inherit }
+
+/* Provide easy utility for container spacing */
+.container { padding-left: 1rem; padding-right: 1rem }
