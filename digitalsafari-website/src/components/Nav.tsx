@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from './Nav.module.css';
 
 export default function Nav() {
   return (
-    <nav className={styles.nav}>
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Blog</a>
+    <nav className="flex gap-6 items-center">
+      <a href="#" className="text-slate-700 hover:text-slate-900">Home</a>
+      <a href="#" className="text-slate-700 hover:text-slate-900">About</a>
+      <a href="#" className="text-slate-700 hover:text-slate-900">Blog</a>
     </nav>
   );
 }

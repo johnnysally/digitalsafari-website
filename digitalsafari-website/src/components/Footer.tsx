@@ -1,11 +1,10 @@
 import React from 'react';
-import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <footer className={styles.footer}>
+    <footer className="flex justify-between px-6 py-4 text-sm text-slate-500 dark:text-slate-400 border-t">
       <div>© {new Date().getFullYear()} DigitalSafari</div>
-      <div className={styles.right}>Built with care.</div>
+      <div className="text-right">Built with care.</div>
     </footer>
   );
 }

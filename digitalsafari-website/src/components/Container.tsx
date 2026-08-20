@@ -1,6 +1,5 @@
 import React from 'react';
-import styles from './Container.module.css';
 
 export default function Container({ children }: { children: React.ReactNode }) {
-  return <div className={styles.container}>{children}</div>;
+  return <div className="max-w-6xl mx-auto px-4">{children}</div>;
 }
