@@ -15,6 +15,7 @@ import { GetStartedPage } from "./pages/GetStartedPage";
 import { ServiceDetailPage } from "./pages/ServiceDetailPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { SiteConfigProvider } from "./context/SiteConfigContext";
+import { SEO } from "./components/seo/SEO";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -29,6 +30,7 @@ export const App: React.FC = () => {
     <Router>
       <SiteConfigProvider>
         <ScrollToTop />
+        <SEO />
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-grow">
