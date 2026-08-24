@@ -1,6 +1,5 @@
 import React from "react";
 import { Compass, ShieldCheck, Heart, Sparkles, Target, Eye, MapPin, Users } from "lucide-react";
-import { LINKS } from "../utils/links";
 
 export const AboutPage: React.FC = () => {
   return (

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { ArrowUpRight, UserCheck, Building2, CheckCircle2, ChevronRight } from "lucide-react";
-import { LINKS } from "../utils/links";
+import { useSiteConfig } from "../context/SiteConfigContext";
 
 export const HowItWorksPage: React.FC = () => {
   const [journeyTab, setJourneyTab] = useState<"customer" | "business">("customer");
+  const config = useSiteConfig();
+  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
 
   const customerSteps = [
     { num: "01", title: "Visit DigitalSafari", desc: "Browse platform services on our website or mobile portal." },
@@ -96,7 +98,7 @@ export const HowItWorksPage: React.FC = () => {
         <div className="mt-16 text-center">
           {journeyTab === "customer" ? (
             <a
-              href={LINKS.START_JOURNEY}
+              href={config?.app_links.customer || "/get-started"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-sm transition-all"
@@ -106,7 +108,7 @@ export const HowItWorksPage: React.FC = () => {
             </a>
           ) : (
             <a
-              href={LINKS.BECOME_PARTNER}
+              href={partnerUrl || "/businesses"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-sm transition-all"

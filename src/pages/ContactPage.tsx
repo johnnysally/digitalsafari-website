@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Mail, Phone, MapPin, Send, MessageCircle, CheckCircle2 } from "lucide-react";
-import { LINKS } from "../utils/links";
+import { sendContact } from "../api/publicApi";
+import { useSiteConfig } from "../context/SiteConfigContext";
 
 export const ContactPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,11 +12,20 @@ export const ContactPage: React.FC = () => {
     message: ""
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const config = useSiteConfig();
+  const whatsappUrl = config?.whatsapp_number ? `https://wa.me/${config.whatsapp_number.replace(/\D/g, "")}` : null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
-    setSubmitted(true);
+    setSubmitting(true);
+    try {
+      await sendContact(formData);
+      setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -53,8 +63,8 @@ export const ContactPage: React.FC = () => {
                   </div>
                   <div>
                     <h5 className="font-bold text-[#191816]">General Support</h5>
-                    <a href={`mailto:${LINKS.CONTACT_EMAIL}`} className="text-[#c47c2b] underline">
-                      {LINKS.CONTACT_EMAIL}
+                    <a href={config?.support_email ? `mailto:${config.support_email}` : undefined} className="text-[#c47c2b] underline">
+                      {config?.support_email || "Contact support"}
                     </a>
                   </div>
                 </div>
@@ -65,8 +75,8 @@ export const ContactPage: React.FC = () => {
                   </div>
                   <div>
                     <h5 className="font-bold text-[#191816]">Business & Partner Inquiries</h5>
-                    <a href={`mailto:${LINKS.PARTNER_EMAIL}`} className="text-[#c47c2b] underline">
-                      {LINKS.PARTNER_EMAIL}
+                    <a href={config?.support_email ? `mailto:${config.support_email}` : undefined} className="text-[#c47c2b] underline">
+                      {config?.support_email || "Contact support"}
                     </a>
                   </div>
                 </div>
@@ -77,7 +87,7 @@ export const ContactPage: React.FC = () => {
                   </div>
                   <div>
                     <h5 className="font-bold text-[#191816]">Telephone</h5>
-                    <p className="text-[#5e5950]">{LINKS.PHONE}</p>
+                    <p className="text-[#5e5950]">{config?.support_phone || "Contact support"}</p>
                   </div>
                 </div>
 
@@ -87,7 +97,7 @@ export const ContactPage: React.FC = () => {
                   </div>
                   <div>
                     <h5 className="font-bold text-[#191816]">WhatsApp Support</h5>
-                    <a href={LINKS.WHATSAPP} target="_blank" rel="noopener noreferrer" className="text-[#c47c2b] underline">
+                    <a href={whatsappUrl || undefined} target="_blank" rel="noopener noreferrer" className="text-[#c47c2b] underline">
                       Chat on WhatsApp ➔
                     </a>
                   </div>
@@ -209,10 +219,11 @@ export const ContactPage: React.FC = () => {
 
                   <button
                     type="submit"
+                    disabled={submitting}
                     className="w-full inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider py-4 rounded-full shadow-sm transition-all"
                   >
                     <Send className="w-4 h-4" />
-                    Submit Message
+                    {submitting ? "Sending..." : "Submit Message"}
                   </button>
                 </form>
               )}

@@ -14,6 +14,7 @@ import { ContactPage } from "./pages/ContactPage";
 import { GetStartedPage } from "./pages/GetStartedPage";
 import { ServiceDetailPage } from "./pages/ServiceDetailPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { SiteConfigProvider } from "./context/SiteConfigContext";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -26,26 +27,28 @@ const ScrollToTop = () => {
 export const App: React.FC = () => {
   return (
     <Router>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/how-it-works" element={<HowItWorksPage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/services/:type" element={<ServiceDetailPage />} />
-            <Route path="/businesses" element={<BusinessesPage />} />
-            <Route path="/faq" element={<FAQPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/get-started" element={<GetStartedPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </main>
-        <Footer />
-        <ChatWidget />
-      </div>
+      <SiteConfigProvider>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/how-it-works" element={<HowItWorksPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/services/:type" element={<ServiceDetailPage />} />
+              <Route path="/businesses" element={<BusinessesPage />} />
+              <Route path="/faq" element={<FAQPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/get-started" element={<GetStartedPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </main>
+          <Footer />
+          <ChatWidget />
+        </div>
+      </SiteConfigProvider>
     </Router>
   );
 };

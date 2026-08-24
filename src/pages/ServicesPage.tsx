@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { ArrowUpRight, CheckCircle2, Bed, Utensils, Car, Compass, ShieldCheck, MapPin } from "lucide-react";
-import { LINKS } from "../utils/links";
+import { useSiteConfig } from "../context/SiteConfigContext";
 import { SERVICES_DATA } from "../utils/constants";
 
 export const ServicesPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const config = useSiteConfig();
+  const customerUrl = config?.app_links.customer?.replace(/\/$/, "");
 
   const scrollToSection = (id: string) => {
     setActiveCategory(id);
@@ -118,7 +120,7 @@ export const ServicesPage: React.FC = () => {
 
               <div>
                 <a
-                  href={`${LINKS.CUSTOMER_APP_URL}/accommodation`}
+                  href={customerUrl || "/get-started"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full shadow-sm hover:shadow transition-all"
@@ -239,7 +241,7 @@ export const ServicesPage: React.FC = () => {
 
               <div>
                 <a
-                  href={`${LINKS.CUSTOMER_APP_URL}/food`}
+                  href={customerUrl ? `${customerUrl}/food` : undefined}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full shadow-sm hover:shadow transition-all"
@@ -309,7 +311,7 @@ export const ServicesPage: React.FC = () => {
 
               <div>
                 <a
-                  href={`${LINKS.CUSTOMER_APP_URL}/transport`}
+                  href={customerUrl ? `${customerUrl}/transport` : undefined}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full shadow-sm hover:shadow transition-all"
@@ -439,7 +441,7 @@ export const ServicesPage: React.FC = () => {
 
               <div>
                 <a
-                  href={`${LINKS.CUSTOMER_APP_URL}/experiences`}
+                  href={customerUrl ? `${customerUrl}/experiences` : undefined}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full shadow-sm hover:shadow transition-all"
@@ -470,7 +472,7 @@ export const ServicesPage: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <a
-              href={LINKS.START_JOURNEY}
+              href={config?.app_links.customer || "/get-started"}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-sm transition-all"
@@ -479,7 +481,7 @@ export const ServicesPage: React.FC = () => {
               <ArrowUpRight className="w-4 h-4" />
             </a>
             <a
-              href={LINKS.BECOME_PARTNER}
+              href={config?.app_links.partner_landing || config?.app_links.transport_partner || "/businesses"}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-[#191816] hover:bg-[#191816] hover:text-white text-[#191816] text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all"

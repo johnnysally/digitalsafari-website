@@ -1,9 +1,11 @@
 import React from "react";
 import { ArrowUpRight, Globe, TrendingUp, Sliders, BarChart3, Headphones, Rocket, Hotel, Utensils, Car, Compass, Anchor, Bus, Mail } from "lucide-react";
-import { LINKS } from "../utils/links";
+import { useSiteConfig } from "../context/SiteConfigContext";
 import { BUSINESS_BENEFITS, PARTNER_TYPES, ONBOARDING_STEPS } from "../utils/constants";
 
 export const BusinessesPage: React.FC = () => {
+  const config = useSiteConfig();
+  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
   return (
     <div className="bg-[#f9f7f4] min-h-screen text-[#191816] pt-8 pb-20">
       
@@ -34,7 +36,7 @@ export const BusinessesPage: React.FC = () => {
         {/* Hero CTAs */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href={LINKS.BECOME_PARTNER}
+            href={partnerUrl || "/businesses"}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-sm transition-all transform hover:-translate-y-0.5"
@@ -170,7 +172,7 @@ export const BusinessesPage: React.FC = () => {
 
           <div>
             <a
-              href={LINKS.BECOME_PARTNER}
+              href={partnerUrl || "/businesses"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-sm transition-all transform hover:-translate-y-0.5"
@@ -183,8 +185,8 @@ export const BusinessesPage: React.FC = () => {
           <div className="pt-2 text-xs text-[#5e5950] flex items-center justify-center gap-2">
             <Mail className="w-4 h-4 text-[#c47c2b]" />
             <span>Questions? Contact our partner support team at</span>
-            <a href={`mailto:${LINKS.PARTNER_EMAIL}`} className="font-semibold text-[#191816] underline">
-              {LINKS.PARTNER_EMAIL}
+            <a href={config?.support_email ? `mailto:${config.support_email}` : undefined} className="font-semibold text-[#191816] underline">
+              {config?.support_email || "Contact support"}
             </a>
           </div>
         </div>

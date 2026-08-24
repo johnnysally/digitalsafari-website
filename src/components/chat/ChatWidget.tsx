@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MessageSquare, X, Send, Compass } from "lucide-react";
-import { LINKS } from "../../utils/links";
+import { sendAiChat } from "../../api/publicApi";
+import { useSiteConfig } from "../../context/SiteConfigContext";
 
 export const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState([
     {
       sender: "bot",
       text: "Jambo! Welcome to DigitalSafari. How can I help you plan your journey or partner your business today?"
     }
   ]);
+  const config = useSiteConfig();
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,18 +27,9 @@ export const ChatWidget: React.FC = () => {
     setMessages(prev => [...prev, { sender: "user", text: userMsg }]);
     setInput("");
 
-    setTimeout(() => {
-      let botReply = "Thank you for reaching out! You can explore our services or click 'Start Your Journey' to access our live app.";
-      const lower = userMsg.toLowerCase();
-      if (lower.includes("hotel") || lower.includes("stay") || lower.includes("accommodation")) {
-        botReply = "DigitalSafari connects you with 60+ verified hotels and BnBs across Naivasha, Nakuru, and Nairobi. Click 'Start Your Journey' to view listings!";
-      } else if (lower.includes("partner") || lower.includes("business") || lower.includes("join")) {
-        botReply = "Are you a business owner? Click 'Become a Partner' to register your hotel, restaurant, or transport service on DigitalSafari!";
-      } else if (lower.includes("food") || lower.includes("restaurant")) {
-        botReply = "Explore top local menus and order delivery or takeout directly through DigitalSafari platform!";
-      }
-      setMessages(prev => [...prev, { sender: "bot", text: botReply }]);
-    }, 600);
+    sendAiChat(userMsg)
+      .then((response) => setMessages(prev => [...prev, { sender: "bot", text: response.reply || response.message || "Thanks for your message." }]))
+      .catch(() => setMessages(prev => [...prev, { sender: "bot", text: "Sorry, we could not reach the concierge right now." }]));
   };
 
   return (
@@ -77,14 +75,15 @@ export const ChatWidget: React.FC = () => {
                 </div>
               </div>
             ))}
+            <div ref={messagesEndRef} />
           </div>
 
           {/* Quick Actions */}
           <div className="px-3 py-2 bg-white border-t border-[#e6dfd5] flex items-center gap-2 overflow-x-auto text-[11px]">
-            <a href={LINKS.START_JOURNEY} target="_blank" rel="noopener noreferrer" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
+            <a href={config?.app_links.customer || "/get-started"} target="_blank" rel="noopener noreferrer" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
               Start Journey ➔
             </a>
-            <a href={LINKS.BECOME_PARTNER} target="_blank" rel="noopener noreferrer" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
+            <a href={config?.app_links.partner_landing || config?.app_links.transport_partner || "/businesses"} target="_blank" rel="noopener noreferrer" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
               Become Partner ➔
             </a>
           </div>
@@ -96,7 +95,7 @@ export const ChatWidget: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask a question..."
-              className="flex-1 px-3 py-1.5 rounded-full bg-[#f9f7f4] border border-[#e6dfd5] text-xs focus:outline-none focus:border-[#c47c2b]"
+              className="flex-1 px-3 py-1.5 rounded-full bg-[#f9f7f4] border border-[#e6dfd5] text-xs text-[#191816] placeholder:text-[#8e877e] focus:outline-none focus:border-[#c47c2b]"
             />
             <button
               type="submit"

@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Compass, Menu, X, ArrowUpRight } from "lucide-react";
 import { NAV_ITEMS } from "../../utils/constants";
-import { LINKS } from "../../utils/links";
+import { useSiteConfig } from "../../context/SiteConfigContext";
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const config = useSiteConfig();
+  const customerUrl = config?.app_links.customer;
+  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
 
   const isActive = (path: string) => {
     if (path === "/" && location.pathname === "/") return true;
@@ -52,7 +55,7 @@ export const Navbar: React.FC = () => {
           {/* Action CTAs */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href={LINKS.START_JOURNEY}
+              href={customerUrl || "/get-started"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-sm hover:shadow transition-all transform hover:-translate-y-0.5"
@@ -97,7 +100,7 @@ export const Navbar: React.FC = () => {
 
           <div className="pt-4 border-t border-[#e6dfd5] flex flex-col gap-2">
             <a
-              href={LINKS.START_JOURNEY}
+              href={customerUrl || "/get-started"}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full text-center bg-[#c47c2b] text-white py-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm"
@@ -105,7 +108,7 @@ export const Navbar: React.FC = () => {
               Start Your Journey
             </a>
             <a
-              href={LINKS.BECOME_PARTNER}
+              href={partnerUrl || "/businesses"}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full text-center border border-[#191816] text-[#191816] py-3 rounded-full text-xs font-bold uppercase tracking-wider"

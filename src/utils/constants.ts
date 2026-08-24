@@ -1,5 +1,3 @@
-import { LINKS } from "./links";
-
 export interface NavItem {
     label: string;
     href: string;
@@ -32,7 +30,6 @@ export const SERVICES_DATA = [
         ],
         ctaText: "EXPLORE ACCOMMODATION →",
         href: "/services/accommodation",
-        saasHref: `${LINKS.CUSTOMER_APP_URL}/accommodation`,
         pills: ["Hotels", "BnBs", "Apartments", "Lodges"],
         locations: ["Naivasha", "Nakuru", "Nairobi", "Mombasa"]
     },
@@ -52,7 +49,6 @@ export const SERVICES_DATA = [
         ],
         ctaText: "EXPLORE FOOD & DINING →",
         href: "/services/food",
-        saasHref: `${LINKS.CUSTOMER_APP_URL}/food`,
         pills: ["Restaurants", "Local Cuisine", "Delivery", "Dine-in"],
         locations: ["Naivasha Town", "Kariandusi", "Nakuru CBD"]
     },
@@ -72,7 +68,6 @@ export const SERVICES_DATA = [
         ],
         ctaText: "EXPLORE TRANSPORT →",
         href: "/services/transport",
-        saasHref: `${LINKS.CUSTOMER_APP_URL}/transport`,
         pills: ["Taxis", "Shuttles", "Car Hire", "Airport Transfers"],
         locations: ["Nairobi-Naivasha Route", "Nakuru Shuttles", "Airport Pickups"]
     },
@@ -92,7 +87,6 @@ export const SERVICES_DATA = [
         ],
         ctaText: "EXPLORE EXPERIENCES →",
         href: "/services/experiences",
-        saasHref: `${LINKS.CUSTOMER_APP_URL}/experiences`,
         pills: ["Safaris", "Boat Tours", "Hiking", "Culture"],
         highlightCard: {
             tag: "Guiding Company",

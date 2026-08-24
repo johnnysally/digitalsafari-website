@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, HelpCircle, Mail, MessageSquare } from "lucide-react";
 import { FAQS } from "../utils/constants";
-import { LINKS } from "../utils/links";
+import { useSiteConfig } from "../context/SiteConfigContext";
 
 export const FAQPage: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const config = useSiteConfig();
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -81,7 +82,7 @@ export const FAQPage: React.FC = () => {
               Contact Support
             </Link>
             <a
-              href={`mailto:${LINKS.CONTACT_EMAIL}`}
+              href={config?.support_email ? `mailto:${config.support_email}` : undefined}
               className="inline-flex items-center gap-2 border border-[#191816] text-[#191816] hover:bg-[#191816] hover:text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded-full transition-all"
             >
               Email Us Directly

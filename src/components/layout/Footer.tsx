@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Compass, ArrowUpRight } from "lucide-react";
-import { LINKS } from "../../utils/links";
+import { useSiteConfig } from "../../context/SiteConfigContext";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const config = useSiteConfig();
+  const customerUrl = config?.app_links.customer;
+  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
 
   return (
     <footer className="bg-[#141312] text-[#dcd6cd] pt-16 pb-12 border-t border-[#2a2825]">
@@ -28,7 +31,7 @@ export const Footer: React.FC = () => {
 
             <div className="pt-2 flex items-center gap-3">
               <a
-                href={LINKS.START_JOURNEY}
+                href={customerUrl || "/get-started"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-colors"
@@ -37,7 +40,7 @@ export const Footer: React.FC = () => {
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
               <a
-                href={LINKS.BECOME_PARTNER}
+                href={partnerUrl || "/businesses"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 border border-[#3a3733] hover:border-[#c47c2b] text-[#dcd6cd] hover:text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-colors"
@@ -74,7 +77,7 @@ export const Footer: React.FC = () => {
                 <Link to="/businesses" className="hover:text-white transition-colors">Become a Partner</Link>
               </li>
               <li>
-                <a href={LINKS.PARTNER_LOGIN} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
+                <a href={partnerUrl || "/businesses"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
                   Partner Portal <ArrowUpRight className="w-3 h-3 text-[#9e978e]" />
                 </a>
               </li>
@@ -101,7 +104,7 @@ export const Footer: React.FC = () => {
                 <span className="text-[#8e877e]">Terms of Service</span>
               </li>
               <li className="pt-2 text-xs text-[#8e877e]">
-                Direct Email: <a href={`mailto:${LINKS.CONTACT_EMAIL}`} className="text-[#c47c2b] underline">{LINKS.CONTACT_EMAIL}</a>
+                {config?.support_email && <>Direct Email: <a href={`mailto:${config.support_email}`} className="text-[#c47c2b] underline">{config.support_email}</a></>}
               </li>
             </ul>
           </div>
@@ -113,16 +116,16 @@ export const Footer: React.FC = () => {
           <p>© {currentYear} DigitalSafari — All rights reserved.</p>
 
           <div className="flex items-center space-x-4">
-            <a href={LINKS.SOCIAL.INSTAGRAM} target="_blank" rel="noopener noreferrer" className="hover:text-[#c47c2b] transition-colors" aria-label="Instagram">
+            <a href={config?.social_links.instagram || undefined} target="_blank" rel="noopener noreferrer" className="hover:text-[#c47c2b] transition-colors" aria-label="Instagram">
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
-            <a href={LINKS.SOCIAL.FACEBOOK} target="_blank" rel="noopener noreferrer" className="hover:text-[#c47c2b] transition-colors" aria-label="Facebook">
+            <a href={config?.social_links.facebook || undefined} target="_blank" rel="noopener noreferrer" className="hover:text-[#c47c2b] transition-colors" aria-label="Facebook">
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.7 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/></svg>
             </a>
-            <a href={LINKS.SOCIAL.LINKEDIN} target="_blank" rel="noopener noreferrer" className="hover:text-[#c47c2b] transition-colors" aria-label="LinkedIn">
+            <a href={config?.social_links.linkedin || undefined} target="_blank" rel="noopener noreferrer" className="hover:text-[#c47c2b] transition-colors" aria-label="LinkedIn">
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
             </a>
-            <a href={LINKS.SOCIAL.X} target="_blank" rel="noopener noreferrer" className="hover:text-[#c47c2b] transition-colors" aria-label="X Twitter">
+            <a href={config?.social_links.x || undefined} target="_blank" rel="noopener noreferrer" className="hover:text-[#c47c2b] transition-colors" aria-label="X Twitter">
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
           </div>
