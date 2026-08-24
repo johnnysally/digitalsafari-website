@@ -134,8 +134,13 @@ export const ServicesPage: React.FC = () => {
             {/* Right Card Graphic */}
             <div className="lg:col-span-6">
               <div className="bg-white p-8 rounded-3xl border border-[#e6dfd5] shadow-sm relative overflow-hidden group">
-                <div className="h-72 sm:h-80 bg-gradient-to-br from-[#eae3d9] to-[#f4efe8] rounded-2xl flex flex-col justify-between p-6 relative">
-                  <div className="flex items-center justify-between">
+                <div
+                  className="h-72 sm:h-80 rounded-2xl flex flex-col justify-between p-6 relative bg-center bg-cover"
+                  style={{ backgroundImage: "url('/accomodation.jpg')" }}
+                >
+                  <div className="absolute inset-0 bg-black/25 rounded-2xl" />
+
+                  <div className="flex items-center justify-between relative z-10">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#191816] text-xs font-bold shadow-xs">
                       <Bed className="w-4 h-4 text-[#c47c2b]" />
                       ACCOMMODATION
@@ -145,7 +150,7 @@ export const ServicesPage: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="space-y-2 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white shadow-xs">
+                  <div className="space-y-2 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white shadow-xs relative z-10">
                     <div className="flex items-center justify-between text-xs font-bold text-[#191816]">
                       <span>Lake Naivasha Resort & Lodges</span>
                       <span className="text-[#c47c2b]">Verified</span>
@@ -172,8 +177,13 @@ export const ServicesPage: React.FC = () => {
             {/* Left Card Graphic (Reversed layout) */}
             <div className="lg:col-span-6 order-2 lg:order-1">
               <div className="bg-white p-8 rounded-3xl border border-[#e6dfd5] shadow-sm relative overflow-hidden">
-                <div className="h-72 sm:h-80 bg-gradient-to-br from-[#f4efe8] to-[#eae3d9] rounded-2xl flex flex-col justify-between p-6">
-                  <div className="flex items-center justify-between">
+                <div
+                  className="h-72 sm:h-80 rounded-2xl flex flex-col justify-between p-6 relative bg-center bg-cover"
+                  style={{ backgroundImage: "url('/Catering.jpg')" }}
+                >
+                  <div className="absolute inset-0 bg-black/25 rounded-2xl" />
+
+                  <div className="flex items-center justify-between relative z-10">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#191816] text-xs font-bold shadow-xs">
                       <Utensils className="w-4 h-4 text-[#c47c2b]" />
                       FOOD & DINING
@@ -183,7 +193,7 @@ export const ServicesPage: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="space-y-2 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white shadow-xs">
+                  <div className="space-y-2 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white shadow-xs relative z-10">
                     <div className="flex items-center justify-between text-xs font-bold text-[#191816]">
                       <span>Swahili Coast & Grill House</span>
                       <span className="text-xs text-green-600 bg-green-50 px-2 py-0.5 rounded">Open Now</span>
@@ -325,8 +335,13 @@ export const ServicesPage: React.FC = () => {
             {/* Right Card Graphic */}
             <div className="lg:col-span-6">
               <div className="bg-white p-8 rounded-3xl border border-[#e6dfd5] shadow-sm relative overflow-hidden">
-                <div className="h-72 sm:h-80 bg-gradient-to-br from-[#eae3d9] to-[#f4efe8] rounded-2xl flex flex-col justify-between p-6">
-                  <div className="flex items-center justify-between">
+                <div
+                  className="h-72 sm:h-80 rounded-2xl flex flex-col justify-between p-6 relative bg-center bg-cover"
+                  style={{ backgroundImage: "url('/trasportation.jpg')" }}
+                >
+                  <div className="absolute inset-0 bg-black/25 rounded-2xl" />
+
+                  <div className="flex items-center justify-between relative z-10">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#191816] text-xs font-bold shadow-xs">
                       <Car className="w-4 h-4 text-[#c47c2b]" />
                       TRANSPORTATION
@@ -336,7 +351,7 @@ export const ServicesPage: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="space-y-2 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white shadow-xs">
+                  <div className="space-y-2 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white shadow-xs relative z-10">
                     <div className="flex items-center justify-between text-xs font-bold text-[#191816]">
                       <span>Rift Valley Express Shuttles</span>
                       <span className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded">Verified Driver</span>
@@ -363,8 +378,13 @@ export const ServicesPage: React.FC = () => {
             {/* Left Card Graphic (Reversed layout) */}
             <div className="lg:col-span-6 order-2 lg:order-1">
               <div className="bg-white p-8 rounded-3xl border border-[#e6dfd5] shadow-sm relative overflow-hidden">
-                <div className="h-72 sm:h-80 bg-gradient-to-br from-[#f4efe8] to-[#eae3d9] rounded-2xl flex flex-col justify-between p-6">
-                  <div className="flex items-center justify-between">
+                <div
+                  className="h-72 sm:h-80 rounded-2xl flex flex-col justify-between p-6 relative bg-center bg-cover"
+                  style={{ backgroundImage: "url('/experience.jpg')" }}
+                >
+                  <div className="absolute inset-0 bg-black/25 rounded-2xl" />
+
+                  <div className="flex items-center justify-between relative z-10">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[#191816] text-xs font-bold shadow-xs">
                       <Compass className="w-4 h-4 text-[#c47c2b]" />
                       EXPERIENCES
@@ -374,7 +394,7 @@ export const ServicesPage: React.FC = () => {
                     </span>
                   </div>
 
-                  <div className="space-y-2 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white shadow-xs">
+                  <div className="space-y-2 bg-white/90 backdrop-blur-md p-4 rounded-xl border border-white shadow-xs relative z-10">
                     <div className="flex items-center justify-between text-xs font-bold text-[#191816]">
                       <span>Hell's Gate & Boat Safari Excursion</span>
                       <span className="text-xs text-amber-700 bg-amber-50 px-2 py-0.5 rounded">Top Rated</span>

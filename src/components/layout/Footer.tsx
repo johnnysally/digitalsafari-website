@@ -16,13 +16,12 @@ export const Footer: React.FC = () => {
           
           {/* Brand Info */}
           <div className="md:col-span-5 space-y-4">
-            <Link to="/" className="inline-flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#c47c2b] to-[#e6a254] flex items-center justify-center text-white">
-                <Compass className="w-5 h-5" />
-              </div>
-              <span className="text-xl font-bold tracking-tight text-white">
-                Digital<span className="text-[#c47c2b]">Safari</span>
-              </span>
+            <Link to="/" className="inline-block p-2 bg-white rounded-2xl shadow-sm border border-white/10 hover:opacity-95 transition-opacity">
+              <img
+                src="/logo.png"
+                alt="DigitalSafaris Logo"
+                className="h-14 sm:h-16 w-auto object-contain"
+              />
             </Link>
 
             <p className="text-sm text-[#9e978e] max-w-md leading-relaxed">

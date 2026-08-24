@@ -23,13 +23,12 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           
           {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#c47c2b] to-[#e6a254] flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
-              <Compass className="w-5 h-5 animate-pulse" />
-            </div>
-            <span className="text-xl font-bold tracking-tight text-[#191816]">
-              Digital<span className="text-[#c47c2b]">Safari</span>
-            </span>
+          <Link to="/" className="flex items-center gap-2 group py-1">
+            <img
+              src="/logo.png"
+              alt="DigitalSafaris Logo"
+              className="h-14 sm:h-16 w-auto object-contain group-hover:scale-105 transition-transform"
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
