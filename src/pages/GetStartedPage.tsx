@@ -1,10 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, Compass, Building2, UserCheck, CheckCircle2 } from "lucide-react";
 import { useSiteConfig } from "../context/SiteConfigContext";
 
 export const GetStartedPage: React.FC = () => {
   const config = useSiteConfig();
-  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
   return (
     <div className="bg-[#f9f7f4] min-h-screen text-[#191816] pt-8 pb-20 flex flex-col justify-center">
       
@@ -106,15 +106,13 @@ export const GetStartedPage: React.FC = () => {
             </div>
 
             <div>
-              <a
-                href={partnerUrl || "/businesses"}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/partner-registration"
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider py-4 rounded-full shadow-sm transition-all"
               >
                 Become a Partner
                 <ArrowUpRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
           </div>
 

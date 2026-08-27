@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, UserCheck, Building2, CheckCircle2, ChevronRight } from "lucide-react";
 import { useSiteConfig } from "../context/SiteConfigContext";
 
 export const HowItWorksPage: React.FC = () => {
   const [journeyTab, setJourneyTab] = useState<"customer" | "business">("customer");
   const config = useSiteConfig();
-  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
 
   const customerSteps = [
     { num: "01", title: "Visit DigitalSafari", desc: "Browse platform services on our website or mobile portal." },
@@ -107,15 +107,13 @@ export const HowItWorksPage: React.FC = () => {
               <ArrowUpRight className="w-4 h-4" />
             </a>
           ) : (
-            <a
-              href={partnerUrl || "/businesses"}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/partner-registration"
               className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-sm transition-all"
             >
               Register Your Business
               <ArrowUpRight className="w-4 h-4" />
-            </a>
+            </Link>
           )}
         </div>
       </section>

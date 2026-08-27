@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, CheckCircle2, Bed, Utensils, Car, Compass, ShieldCheck, MapPin } from "lucide-react";
 import { useSiteConfig } from "../context/SiteConfigContext";
 import { SERVICES_DATA } from "../utils/constants";
@@ -500,14 +501,12 @@ export const ServicesPage: React.FC = () => {
               START YOUR JOURNEY
               <ArrowUpRight className="w-4 h-4" />
             </a>
-            <a
-              href={config?.app_links.partner_landing || config?.app_links.transport_partner || "/businesses"}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/partner-registration"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-[#191816] hover:bg-[#191816] hover:text-white text-[#191816] text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all"
             >
               BECOME A PARTNER
-            </a>
+            </Link>
           </div>
         </div>
       </section>

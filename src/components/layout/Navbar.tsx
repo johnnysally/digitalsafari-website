@@ -9,7 +9,6 @@ export const Navbar: React.FC = () => {
   const location = useLocation();
   const config = useSiteConfig();
   const customerUrl = config?.app_links.customer;
-  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
 
   const isActive = (path: string) => {
     if (path === "/" && location.pathname === "/") return true;
@@ -106,14 +105,13 @@ export const Navbar: React.FC = () => {
             >
               Start Your Journey
             </a>
-            <a
-              href={partnerUrl || "/businesses"}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/partner-registration"
+              onClick={() => setMobileMenuOpen(false)}
               className="w-full text-center border border-[#191816] text-[#191816] py-3 rounded-full text-xs font-bold uppercase tracking-wider"
             >
               Become a Partner
-            </a>
+            </Link>
           </div>
         </div>
       )}

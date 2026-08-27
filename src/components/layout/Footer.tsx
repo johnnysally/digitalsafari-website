@@ -38,14 +38,12 @@ export const Footer: React.FC = () => {
                 Start Your Journey
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
-              <a
-                href={partnerUrl || "/businesses"}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/partner-registration"
                 className="inline-flex items-center gap-1 border border-[#3a3733] hover:border-[#c47c2b] text-[#dcd6cd] hover:text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full transition-colors"
               >
                 Partner With Us
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -73,7 +71,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-xs font-bold uppercase tracking-widest text-[#c47c2b]">Businesses</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/businesses" className="hover:text-white transition-colors">Become a Partner</Link>
+                <Link to="/partner-registration" className="hover:text-white transition-colors">Become a Partner</Link>
               </li>
               <li>
                 <a href={partnerUrl || "/businesses"} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">

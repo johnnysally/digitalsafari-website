@@ -14,6 +14,7 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
   "/faq": { title: "DigitalSafari FAQs", description: "Find answers about DigitalSafari bookings, services, partner registration, and availability in Kenya." },
   "/contact": { title: "Contact DigitalSafari", description: "Contact the DigitalSafari support team about travel services, bookings, or becoming a business partner." },
   "/get-started": { title: "Get Started with DigitalSafari", description: "Choose your path and start using the DigitalSafari customer or partner platform." },
+  "/partner-registration": { title: "Register as a DigitalSafari Partner", description: "Apply to join DigitalSafari and connect your hospitality business with travelers across Kenya." },
 };
 
 const setMeta = (name: string, content: string, attribute = "name") => {

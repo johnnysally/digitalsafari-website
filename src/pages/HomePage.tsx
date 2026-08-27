@@ -5,7 +5,6 @@ import { useSiteConfig } from "../context/SiteConfigContext";
 
 export const HomePage: React.FC = () => {
   const config = useSiteConfig();
-  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
   return (
     <div className="bg-[#f9f7f4] min-h-screen text-[#191816]">
       
@@ -49,14 +48,12 @@ export const HomePage: React.FC = () => {
                   Start Your Journey
                   <ArrowUpRight className="w-4 h-4" />
                 </a>
-                <a
-                  href={partnerUrl || "/businesses"}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/partner-registration"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/80 hover:bg-white hover:text-[#191816] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all backdrop-blur-sm"
                 >
                   Become a Partner
-                </a>
+                </Link>
               </div>
 
               {/* Stats Bar */}
@@ -269,14 +266,12 @@ export const HomePage: React.FC = () => {
           </div>
 
           <div className="lg:col-span-4 flex flex-col gap-3">
-            <a
-              href={partnerUrl || "/businesses"}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/partner-registration"
               className="w-full text-center bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider py-4 rounded-full shadow-sm transition-all"
             >
               Become a Partner
-            </a>
+            </Link>
             <Link
               to="/businesses"
               className="w-full text-center border border-[#3a3733] hover:border-white text-white text-xs font-bold uppercase tracking-wider py-4 rounded-full transition-all"

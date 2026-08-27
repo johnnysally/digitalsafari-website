@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MessageSquare, X, Send, Compass } from "lucide-react";
+import { Link } from "react-router-dom";
 import { sendAiChat } from "../../api/publicApi";
 import { useSiteConfig } from "../../context/SiteConfigContext";
 
@@ -83,9 +84,9 @@ export const ChatWidget: React.FC = () => {
             <a href={config?.app_links.customer || "/get-started"} target="_blank" rel="noopener noreferrer" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
               Start Journey ➔
             </a>
-            <a href={config?.app_links.partner_landing || config?.app_links.transport_partner || "/businesses"} target="_blank" rel="noopener noreferrer" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
+            <Link to="/partner-registration" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
               Become Partner ➔
-            </a>
+            </Link>
           </div>
 
           {/* Input Form */}

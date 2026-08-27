@@ -1,10 +1,10 @@
 import React from "react";
 import { ArrowUpRight, Compass, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useSiteConfig } from "../../context/SiteConfigContext";
 
 export const Hero: React.FC = () => {
   const config = useSiteConfig();
-  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
 
   return (
     <section className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden border-b border-[#e6dfd5]">
@@ -46,14 +46,12 @@ export const Hero: React.FC = () => {
                 Start Your Journey
                 <ArrowUpRight className="w-4 h-4" />
               </a>
-              <a
-                href={partnerUrl || "/businesses"}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/partner-registration"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border border-white/80 hover:bg-white hover:text-[#191816] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full transition-all backdrop-blur-sm"
               >
                 Become a Partner
-              </a>
+              </Link>
             </div>
 
             {/* Stats Bar */}
