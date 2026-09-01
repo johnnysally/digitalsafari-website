@@ -1,13 +1,66 @@
 import React, { FormEvent, useState } from "react";
-import { ArrowLeft, ArrowRight, CheckCircle2, Building2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, Building2, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { sendContact } from "../api/publicApi";
+
+type PartnerFormData = {
+  contactName: string;
+  businessName: string;
+  email: string;
+  phone: string;
+  businessType: string;
+  message: string;
+};
+
+const initialForm: PartnerFormData = {
+  contactName: "",
+  businessName: "",
+  email: "",
+  phone: "",
+  businessType: "",
+  message: "",
+};
 
 export const PartnerRegistrationPage: React.FC = () => {
+  const [formData, setFormData] = useState<PartnerFormData>(initialForm);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleChange = (field: keyof PartnerFormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitted(true);
+    setError("");
+
+    try {
+      setSubmitting(true);
+
+      const businessSummary = [
+        `Business name: ${formData.businessName}`,
+        `Business type: ${formData.businessType}`,
+        formData.message ? `Details: ${formData.message}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      await sendContact({
+        name: formData.contactName,
+        email: formData.email,
+        phone: formData.phone,
+        subject: "partner",
+        message: businessSummary,
+      });
+
+      setSubmitted(true);
+    } catch (submitError) {
+      console.error("Partner registration submission failed:", submitError);
+      setError("We couldn't submit your application right now. Please try again or contact support.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -25,7 +78,7 @@ export const PartnerRegistrationPage: React.FC = () => {
               Partner registration
             </div>
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05]">
-              Bring your business to <span className="text-[#c47c2b]">DigitalSafari.</span>
+              Bring your business to <span className="text-[#c47c2b]">DigitalSafaris.</span>
             </h1>
             <p className="mt-6 text-base sm:text-lg text-[#5e5950] leading-relaxed max-w-md">
               Tell us about your business and our partner team will review your application and help you get set up.
@@ -71,28 +124,70 @@ export const PartnerRegistrationPage: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <label className="space-y-2 text-sm font-semibold">
                     Contact name
-                    <input required name="contactName" type="text" autoComplete="name" placeholder="Your full name" className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20" />
+                    <input
+                      required
+                      name="contactName"
+                      type="text"
+                      autoComplete="name"
+                      placeholder="Your full name"
+                      value={formData.contactName}
+                      onChange={(event) => handleChange("contactName", event.target.value)}
+                      className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20"
+                    />
                   </label>
                   <label className="space-y-2 text-sm font-semibold">
                     Business name
-                    <input required name="businessName" type="text" autoComplete="organization" placeholder="Business name" className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20" />
+                    <input
+                      required
+                      name="businessName"
+                      type="text"
+                      autoComplete="organization"
+                      placeholder="Business name"
+                      value={formData.businessName}
+                      onChange={(event) => handleChange("businessName", event.target.value)}
+                      className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20"
+                    />
                   </label>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <label className="space-y-2 text-sm font-semibold">
                     Email address
-                    <input required name="email" type="email" autoComplete="email" placeholder="you@business.com" className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20" />
+                    <input
+                      required
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      placeholder="you@business.com"
+                      value={formData.email}
+                      onChange={(event) => handleChange("email", event.target.value)}
+                      className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20"
+                    />
                   </label>
                   <label className="space-y-2 text-sm font-semibold">
                     Phone number
-                    <input required name="phone" type="tel" autoComplete="tel" placeholder="+254 700 000 000" className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20" />
+                    <input
+                      required
+                      name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      placeholder="+254 700 000 000"
+                      value={formData.phone}
+                      onChange={(event) => handleChange("phone", event.target.value)}
+                      className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20"
+                    />
                   </label>
                 </div>
 
                 <label className="space-y-2 text-sm font-semibold">
                   Business type
-                  <select required name="businessType" defaultValue="" className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20">
+                  <select
+                    required
+                    name="businessType"
+                    value={formData.businessType}
+                    onChange={(event) => handleChange("businessType", event.target.value)}
+                    className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20"
+                  >
                     <option value="" disabled>Select your business type</option>
                     <option value="accommodation">Hotel, BnB, or lodge</option>
                     <option value="restaurant">Restaurant or food business</option>
@@ -104,12 +199,38 @@ export const PartnerRegistrationPage: React.FC = () => {
 
                 <label className="space-y-2 text-sm font-semibold">
                   Tell us about your business <span className="font-normal text-[#8e877e]">(optional)</span>
-                  <textarea name="message" rows={4} placeholder="Share your location, services, or anything else we should know." className="w-full resize-none rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20" />
+                  <textarea
+                    name="message"
+                    rows={4}
+                    placeholder="Share your location, services, or anything else we should know."
+                    value={formData.message}
+                    onChange={(event) => handleChange("message", event.target.value)}
+                    className="w-full resize-none rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20"
+                  />
                 </label>
 
-                <button type="submit" className="w-full inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-full transition-colors">
-                  Submit application
-                  <ArrowRight className="w-4 h-4" />
+                {error ? (
+                  <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    {error}
+                  </div>
+                ) : null}
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] disabled:cursor-not-allowed disabled:opacity-70 text-white text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-full transition-colors"
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Submit application
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
                 </button>
                 <p className="text-center text-xs text-[#8e877e]">By submitting, you agree to be contacted by the DigitalSafari partner team.</p>
               </form>
