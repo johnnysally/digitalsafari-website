@@ -3,12 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowUpRight, CheckCircle2, Bed, Utensils, Car, Compass, MapPin, ArrowLeft } from "lucide-react";
 import { SERVICES_DATA } from "../utils/constants";
 import { useSiteConfig } from "../context/SiteConfigContext";
+import { LINKS } from "../utils/links";
 
 export const ServiceDetailPage: React.FC = () => {
   const { type } = useParams<{ type: string }>();
   const service = SERVICES_DATA.find((s) => s.id === type) || SERVICES_DATA[0];
   const config = useSiteConfig();
-  const appUrl = config?.app_links.customer ? `${config.app_links.customer.replace(/\/$/, "")}/${service.id}` : undefined;
+  const appUrl = LINKS.getServiceUrl(config, service.id);
 
   return (
     <div className="bg-[#f9f7f4] min-h-screen text-[#191816] pt-8 pb-20">
@@ -49,7 +50,7 @@ export const ServiceDetailPage: React.FC = () => {
 
             <div className="pt-4">
               <a
-                href={appUrl || "/get-started"}
+                href={appUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-sm transition-all"

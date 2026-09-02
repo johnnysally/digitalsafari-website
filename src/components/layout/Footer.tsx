@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Compass, ArrowUpRight } from "lucide-react";
 import { useSiteConfig } from "../../context/SiteConfigContext";
+import { LINKS } from "../../utils/links";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const config = useSiteConfig();
-  const customerUrl = config?.app_links.customer;
-  const partnerUrl = config?.app_links.partner_landing || config?.app_links.transport_partner;
+  const customerUrl = LINKS.getCustomerUrl(config);
+  const partnerUrl = LINKS.getPartnerUrl(config);
 
   return (
     <footer className="bg-[#141312] text-[#dcd6cd] pt-16 pb-12 border-t border-[#2a2825]">

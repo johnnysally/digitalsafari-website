@@ -3,6 +3,7 @@ import { MessageSquare, X, Send, Compass } from "lucide-react";
 import { Link } from "react-router-dom";
 import { sendAiChat } from "../../api/publicApi";
 import { useSiteConfig } from "../../context/SiteConfigContext";
+import { LINKS } from "../../utils/links";
 
 export const ChatWidget: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,8 @@ export const ChatWidget: React.FC = () => {
     }
   ]);
   const config = useSiteConfig();
+  const customerUrl = LINKS.getCustomerUrl(config);
+  const partnerUrl = LINKS.getPartnerUrl(config);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -81,7 +84,7 @@ export const ChatWidget: React.FC = () => {
 
           {/* Quick Actions */}
           <div className="px-3 py-2 bg-white border-t border-[#e6dfd5] flex items-center gap-2 overflow-x-auto text-[11px]">
-            <a href={config?.app_links.customer || "/get-started"} target="_blank" rel="noopener noreferrer" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
+            <a href={customerUrl} target="_blank" rel="noopener noreferrer" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">
               Start Journey ➔
             </a>
             <Link to="/partner-registration" className="shrink-0 px-2.5 py-1 rounded-full bg-[#eae3d9] text-[#191816] font-semibold hover:bg-[#c47c2b] hover:text-white transition-colors">

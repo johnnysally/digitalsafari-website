@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, UserCheck, Building2, CheckCircle2, ChevronRight } from "lucide-react";
 import { useSiteConfig } from "../context/SiteConfigContext";
+import { LINKS } from "../utils/links";
 
 export const HowItWorksPage: React.FC = () => {
   const [journeyTab, setJourneyTab] = useState<"customer" | "business">("customer");
   const config = useSiteConfig();
+  const customerUrl = LINKS.getCustomerUrl(config);
+  const partnerUrl = LINKS.getPartnerUrl(config);
 
   const customerSteps = [
     { num: "01", title: "Visit DigitalSafari", desc: "Browse platform services on our website or mobile portal." },
@@ -98,7 +101,7 @@ export const HowItWorksPage: React.FC = () => {
         <div className="mt-16 text-center">
           {journeyTab === "customer" ? (
             <a
-              href={config?.app_links.customer || "/get-started"}
+              href={customerUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-sm transition-all"

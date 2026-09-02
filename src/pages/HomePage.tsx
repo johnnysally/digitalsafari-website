@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Bed, Utensils, Car, Compass, ShieldCheck, CheckCircle2, Building2, Users } from "lucide-react";
 import { useSiteConfig } from "../context/SiteConfigContext";
+import { LINKS } from "../utils/links";
 
 export const HomePage: React.FC = () => {
   const config = useSiteConfig();
+  const customerUrl = LINKS.getCustomerUrl(config);
+  const partnerUrl = LINKS.getPartnerUrl(config);
   return (
     <div className="bg-[#f9f7f4] min-h-screen text-[#191816]">
       
@@ -40,7 +43,7 @@ export const HomePage: React.FC = () => {
               {/* Action CTAs */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
                 <a
-                  href={config?.app_links.customer || "/get-started"}
+                  href={customerUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-lg shadow-black/40 hover:shadow-amber-900/30 transition-all transform hover:-translate-y-0.5"

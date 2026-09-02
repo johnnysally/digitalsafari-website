@@ -18,7 +18,7 @@ export const SiteConfigProvider: React.FC<React.PropsWithChildren> = ({ children
           app_links: {
             ...siteConfig.app_links,
             partner_landing: isLocalPartnerUrl
-              ? siteConfig.app_links.transport_partner
+              ? siteConfig.app_links.transport_partner || partnerLanding
               : partnerLanding,
           },
         });

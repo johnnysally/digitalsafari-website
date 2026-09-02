@@ -2,9 +2,12 @@ import React from "react";
 import { ArrowUpRight, Compass, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSiteConfig } from "../../context/SiteConfigContext";
+import { LINKS } from "../../utils/links";
 
 export const Hero: React.FC = () => {
   const config = useSiteConfig();
+  const customerUrl = LINKS.getCustomerUrl(config);
+  const partnerUrl = LINKS.getPartnerUrl(config);
 
   return (
     <section className="relative pt-12 pb-24 lg:pt-20 lg:pb-32 overflow-hidden border-b border-[#e6dfd5]">
@@ -38,7 +41,7 @@ export const Hero: React.FC = () => {
             {/* Action CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <a
-                href={config?.app_links.customer || "/get-started"}
+                href={customerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-8 py-4 rounded-full shadow-lg shadow-black/40 hover:shadow-amber-900/30 transition-all transform hover:-translate-y-0.5"

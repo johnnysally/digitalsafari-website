@@ -197,8 +197,6 @@ export const PartnerRegistrationPage: React.FC = () => {
                                     <option value="accommodation">Hotel, BnB, or lodge</option>
                                     <option value="restaurant">Restaurant or food business</option>
                                     <option value="transport">Transport provider</option>
-                                    <option value="experience">Tour or experience operator</option>
-                                    <option value="other">Other hospitality business</option>
                                 </select>
                             </label>
 

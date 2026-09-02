@@ -3,12 +3,14 @@ import { Link, useLocation } from "react-router-dom";
 import { Compass, Menu, X, ArrowUpRight } from "lucide-react";
 import { NAV_ITEMS } from "../../utils/constants";
 import { useSiteConfig } from "../../context/SiteConfigContext";
+import { LINKS } from "../../utils/links";
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
   const config = useSiteConfig();
-  const customerUrl = config?.app_links.customer;
+  const customerUrl = LINKS.getCustomerUrl(config);
+  const partnerUrl = LINKS.getPartnerUrl(config);
 
   const isActive = (path: string) => {
     if (path === "/" && location.pathname === "/") return true;
@@ -53,7 +55,7 @@ export const Navbar: React.FC = () => {
           {/* Action CTAs */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href={customerUrl || "/get-started"}
+              href={customerUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full shadow-sm hover:shadow transition-all transform hover:-translate-y-0.5"
@@ -61,6 +63,12 @@ export const Navbar: React.FC = () => {
               Start Your Journey
               <ArrowUpRight className="w-4 h-4" />
             </a>
+            <Link
+              to="/partner-registration"
+              className="inline-flex items-center gap-1.5 border border-[#191816] hover:border-[#c47c2b] text-[#191816] text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-full transition-colors"
+            >
+              Become a Partner
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -98,7 +106,7 @@ export const Navbar: React.FC = () => {
 
           <div className="pt-4 border-t border-[#e6dfd5] flex flex-col gap-2">
             <a
-              href={customerUrl || "/get-started"}
+              href={customerUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full text-center bg-[#c47c2b] text-white py-3 rounded-full text-xs font-bold uppercase tracking-wider shadow-sm"
