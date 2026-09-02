@@ -32,6 +32,7 @@ export interface SiteConfig {
     app_links: AppLinks;
     social_links: SocialLinks;
     ai_chat: AiChatConfig;
+    site_logo: string | null;
 }
 
 export interface Service {

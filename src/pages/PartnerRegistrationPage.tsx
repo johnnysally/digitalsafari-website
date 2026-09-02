@@ -1,7 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { ArrowLeft, ArrowRight, CheckCircle2, Building2, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useSiteConfig } from '../context/SiteConfigContext';
 import { sendContact } from '../api/publicApi';
 
 type PartnerFormData = {
@@ -23,7 +22,6 @@ const initialForm: PartnerFormData = {
 };
 
 export const PartnerRegistrationPage: React.FC = () => {
-    const config = useSiteConfig();
     const [formData, setFormData] = useState<PartnerFormData>(initialForm);
     const [submitted, setSubmitted] = useState(false);
     const [submitting, setSubmitting] = useState(false);
@@ -52,7 +50,7 @@ export const PartnerRegistrationPage: React.FC = () => {
                 name: formData.contactName,
                 email: formData.email,
                 phone: formData.phone,
-                subject: 'Partner Application',
+                subject: 'partner',
                 message: businessSummary,
             });
 
@@ -67,16 +65,16 @@ export const PartnerRegistrationPage: React.FC = () => {
 
     if (submitted) {
         return (
-            <div className="min-h-screen bg-slate-950 flex items-center justify-center px-4">
+            <div className="bg-[#f9f7f4] min-h-screen text-[#191816] flex items-center justify-center px-4">
                 <div className="text-center max-w-md">
-                    <div className="mx-auto w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-6">
+                    <div className="mx-auto w-16 h-16 rounded-full bg-[#f4efe8] flex items-center justify-center text-[#c47c2b] mb-6">
                         <CheckCircle2 className="w-8 h-8" />
                     </div>
-                    <h1 className="text-3xl font-bold text-white">Application received.</h1>
-                    <p className="mt-3 text-slate-400 leading-relaxed">
-                        Thanks for your interest in partnering with {config?.site_name || 'DigitalSafari'}. Our team will be in touch soon.
+                    <h1 className="text-3xl font-extrabold">Application received.</h1>
+                    <p className="mt-3 text-sm text-[#5e5950] max-w-sm mx-auto leading-relaxed">
+                        Thanks for your interest in partnering with DigitalSafari. Our team will be in touch soon.
                     </p>
-                    <Link to="/" className="mt-8 inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-sm font-bold px-6 py-3.5 rounded-full transition-colors">
+                    <Link to="/" className="mt-8 inline-flex items-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] text-white text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-full transition-colors">
                         Return home
                         <ArrowRight className="w-4 h-4" />
                     </Link>
@@ -86,109 +84,114 @@ export const PartnerRegistrationPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 pt-32 pb-20 text-white">
-            <section className="max-w-6xl mx-auto px-4">
-                <Link to="/businesses" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-400 hover:text-emerald-400 transition-colors">
+        <div className="bg-[#f9f7f4] min-h-screen text-[#191816] pt-32 pb-20">
+            <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <Link to="/businesses" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#5e5950] hover:text-[#c47c2b] transition-colors">
                     <ArrowLeft className="w-4 h-4" />
                     Back to partners
                 </Link>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mt-10 items-start">
-                    <div className="lg:col-span-5">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
-                            <Building2 className="w-4 h-4" />
+                    <div className="lg:col-span-5 lg:sticky lg:top-32">
+                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#eae3d9] text-[#191816] text-xs font-bold uppercase tracking-wider mb-6">
+                            <Building2 className="w-4 h-4 text-[#c47c2b]" />
                             Partner registration
                         </div>
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05]">
-                            Bring your business to <span className="text-emerald-400">{config?.site_name || 'DigitalSafari'}.</span>
+                        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05]">
+                            Bring your business to <span className="text-[#c47c2b]">DigitalSafaris.</span>
                         </h1>
-                        <p className="mt-6 text-base sm:text-lg text-slate-400 leading-relaxed max-w-md">
+                        <p className="mt-6 text-base sm:text-lg text-[#5e5950] leading-relaxed max-w-md">
                             Tell us about your business and our partner team will review your application and help you get set up.
                         </p>
-                        <div className="mt-10 border-t border-slate-800 pt-6 space-y-4 text-sm text-slate-400">
+                        <div className="mt-10 border-t border-[#e6dfd5] pt-6 space-y-4 text-sm text-[#5e5950]">
                             <div className="flex items-start gap-3">
-                                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                                <CheckCircle2 className="w-5 h-5 text-[#c47c2b] shrink-0" />
                                 <span>Reach travelers looking for trusted local services.</span>
                             </div>
                             <div className="flex items-start gap-3">
-                                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                                <CheckCircle2 className="w-5 h-5 text-[#c47c2b] shrink-0" />
                                 <span>Manage bookings, listings, and availability in one place.</span>
                             </div>
                             <div className="flex items-start gap-3">
-                                <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                                <CheckCircle2 className="w-5 h-5 text-[#c47c2b] shrink-0" />
                                 <span>Our team will contact you after reviewing your details.</span>
                             </div>
                         </div>
                     </div>
 
-                    <div className="lg:col-span-7 bg-slate-900 rounded-3xl border border-slate-800 p-6 sm:p-10">
+                    <div className="lg:col-span-7 bg-white rounded-3xl border border-[#e6dfd5] p-6 sm:p-10 shadow-sm">
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
-                                <h2 className="text-2xl font-bold text-white">Start your application</h2>
-                                <p className="mt-2 text-sm text-slate-400">A few details is all we need to get started.</p>
+                                <h2 className="text-2xl font-extrabold">Start your application</h2>
+                                <p className="mt-2 text-sm text-[#5e5950]">A few details is all we need to get started.</p>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <label className="space-y-2 text-sm font-semibold text-slate-300">
+                                <label className="space-y-2 text-sm font-semibold">
                                     Contact name
                                     <input
                                         required
+                                        name="contactName"
                                         type="text"
                                         autoComplete="name"
                                         placeholder="Your full name"
                                         value={formData.contactName}
-                                        onChange={(e) => handleChange('contactName', e.target.value)}
-                                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-normal text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition"
+                                        onChange={(event) => handleChange('contactName', event.target.value)}
+                                        className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20 transition"
                                     />
                                 </label>
-                                <label className="space-y-2 text-sm font-semibold text-slate-300">
+                                <label className="space-y-2 text-sm font-semibold">
                                     Business name
                                     <input
                                         required
+                                        name="businessName"
                                         type="text"
                                         autoComplete="organization"
                                         placeholder="Business name"
                                         value={formData.businessName}
-                                        onChange={(e) => handleChange('businessName', e.target.value)}
-                                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-normal text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition"
+                                        onChange={(event) => handleChange('businessName', event.target.value)}
+                                        className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20 transition"
                                     />
                                 </label>
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <label className="space-y-2 text-sm font-semibold text-slate-300">
+                                <label className="space-y-2 text-sm font-semibold">
                                     Email address
                                     <input
                                         required
+                                        name="email"
                                         type="email"
                                         autoComplete="email"
                                         placeholder="you@business.com"
                                         value={formData.email}
-                                        onChange={(e) => handleChange('email', e.target.value)}
-                                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-normal text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition"
+                                        onChange={(event) => handleChange('email', event.target.value)}
+                                        className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20 transition"
                                     />
                                 </label>
-                                <label className="space-y-2 text-sm font-semibold text-slate-300">
+                                <label className="space-y-2 text-sm font-semibold">
                                     Phone number
                                     <input
                                         required
+                                        name="phone"
                                         type="tel"
                                         autoComplete="tel"
                                         placeholder="+254 700 000 000"
                                         value={formData.phone}
-                                        onChange={(e) => handleChange('phone', e.target.value)}
-                                        className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-normal text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition"
+                                        onChange={(event) => handleChange('phone', event.target.value)}
+                                        className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20 transition"
                                     />
                                 </label>
                             </div>
 
-                            <label className="space-y-2 text-sm font-semibold text-slate-300">
+                            <label className="space-y-2 text-sm font-semibold">
                                 Business type
                                 <select
                                     required
+                                    name="businessType"
                                     value={formData.businessType}
-                                    onChange={(e) => handleChange('businessType', e.target.value)}
-                                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-normal text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition"
+                                    onChange={(event) => handleChange('businessType', event.target.value)}
+                                    className="w-full rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20 transition"
                                 >
                                     <option value="" disabled>Select your business type</option>
                                     <option value="accommodation">Hotel, BnB, or lodge</option>
@@ -199,19 +202,20 @@ export const PartnerRegistrationPage: React.FC = () => {
                                 </select>
                             </label>
 
-                            <label className="space-y-2 text-sm font-semibold text-slate-300">
-                                Tell us about your business <span className="font-normal text-slate-500">(optional)</span>
+                            <label className="space-y-2 text-sm font-semibold">
+                                Tell us about your business <span className="font-normal text-[#8e877e]">(optional)</span>
                                 <textarea
+                                    name="message"
                                     rows={4}
                                     placeholder="Share your location, services, or anything else we should know."
                                     value={formData.message}
-                                    onChange={(e) => handleChange('message', e.target.value)}
-                                    className="w-full resize-none rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm font-normal text-white outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition"
+                                    onChange={(event) => handleChange('message', event.target.value)}
+                                    className="w-full resize-none rounded-xl border border-[#dcd3c7] bg-[#f9f7f4] px-4 py-3 text-sm font-normal outline-none focus:border-[#c47c2b] focus:ring-2 focus:ring-[#c47c2b]/20 transition"
                                 />
                             </label>
 
                             {error && (
-                                <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                                <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                                     {error}
                                 </div>
                             )}
@@ -219,7 +223,7 @@ export const PartnerRegistrationPage: React.FC = () => {
                             <button
                                 type="submit"
                                 disabled={submitting}
-                                className="w-full inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-70 text-slate-950 text-sm font-bold px-6 py-4 rounded-full transition-colors"
+                                className="w-full inline-flex items-center justify-center gap-2 bg-[#c47c2b] hover:bg-[#b06d20] disabled:cursor-not-allowed disabled:opacity-70 text-white text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-full transition-colors"
                             >
                                 {submitting ? (
                                     <>
@@ -233,8 +237,8 @@ export const PartnerRegistrationPage: React.FC = () => {
                                     </>
                                 )}
                             </button>
-                            <p className="text-center text-xs text-slate-500">
-                                By submitting, you agree to be contacted by the {config?.site_name || 'DigitalSafari'} partner team.
+                            <p className="text-center text-xs text-[#8e877e]">
+                                By submitting, you agree to be contacted by the DigitalSafari partner team.
                             </p>
                         </form>
                     </div>
